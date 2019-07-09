@@ -2,7 +2,11 @@ const EventListener = require('events');
 
 class LetterEmitter extends EventListener {
   read(str) {
-    str.forEach()
+    str
+      .split('')
+      .forEach(item => {
+        this.emit()
+      })
   }
 }
 

@@ -9,16 +9,19 @@ describe('letter emitter', () => {
   })
 
   it('splits string', done => {
-    const str = 'Max is the best kitty';
+    const str = 'Max is great';
+    const mockCallback = jest.fn();
     // 1. subscribe 
     // listening for emitter and is creating letterObj
-    letterEmitter.on('item', letterObj => {
+    letterEmitter.on('onLetterObj', letterObj => {
       // 3. checking that the letter will match the index
+      mockCallback();
       expect(str[letterObj.offset]).toEqual(letterObj.letter)
     })
-    letterEmitter.on('end', () => {
+    letterEmitter.once('end', () => {
       done();
     })
     letterEmitter.read(str);
+    expect(mockCallback.mock.calls.length).toBe(12);
   })
 });

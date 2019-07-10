@@ -5,15 +5,11 @@ class LetterEmitter extends EventListener {
     console.log(str);
     str
       .split('')
-      .forEach((item, index) => {
+      .forEach((letter, offset) => {
         // 2. publish
         // where we are creating the content of letterObj
-        this.emit('onLetterObj', {
-          // letter is naming the event 
-          letter: item,
-          offset: index
-        })
-      })
+        this.emit('onLetterObj', { letter, offset });
+      });
     this.emit('end');
   }
 }

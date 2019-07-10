@@ -6,7 +6,15 @@ describe('letter emitter', () => {
   beforeEach(done => {
     letterEmitter = new LetterEmitter();
     done();
-  })
+  });
+
+  it('emits end event', done => {
+    const str = 'hello';
+    letterEmitter.on('end', () => {
+      done();
+    });
+    letterEmitter.read(str);
+  });
 
   it('splits string', done => {
     const str = 'Max is great';
@@ -16,7 +24,7 @@ describe('letter emitter', () => {
     letterEmitter.on('onLetterObj', letterObj => {
       // 3. checking that the letter will match the index
       mockCallback();
-      expect(str[letterObj.offset]).toEqual(letterObj.letter)
+      expect(str[letterObj.offset]).toEqual(letterObj.letter);
     })
     letterEmitter.once('end', () => {
       done();
